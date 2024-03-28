@@ -26,6 +26,11 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+## Starter
+```bash
+$ npm install @nestjs/jwt @nestjs/passport @nestjs/swagger @nestjs/typeorm bcrypt class-transformer class-validator dotenv passport passport-jwt pg swagger-ui-express typeorm uuid config
+```
+
 ## Installation
 
 ```bash
