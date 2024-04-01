@@ -2,33 +2,36 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { Usuario } from 'src/usuarios/entities/usuario.entity';
 
 @Entity()
-export class Cobranca {
+export class Transacao{
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Usuario, usuario => usuario.cobrancas)
+  @ManyToOne(() => Usuario, usuario => usuario.transacoes)
   usuario: Usuario;
 
   @Column({ nullable: true })
   refId?: string;
 
   @Column({ nullable: true })
+  tipoTransacao?: string;
+
+  @Column({ nullable: true })
   token?: string;
 
   @Column({ nullable: true })
-  valor?: number;
+  responseRaw?: string;
 
   @Column({ nullable: true })
-  totalTransacoes: number;
+  codeAuth?: string;
 
   @Column({ nullable: true })
-  dataVencimento?: Date;
-
-  @Column({ nullable: true })
-  dataExpiracao?: Date;
+  expireAuth?: Date;
 
   @Column({ nullable: true })
   status?: string;
+
+  @Column({ nullable: true })
+  ip?: string;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created: Date;

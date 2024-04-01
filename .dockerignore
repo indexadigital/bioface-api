@@ -1,0 +1,16 @@
+Dockerfile*
+docker-compose*
+node_modules
+npm-debug.log
+obj
+dist
+.classpath
+.dockerignore
+.env
+.git
+.gitignore
+.project
+.settings
+.toolstarget
+.vs
+.vscode

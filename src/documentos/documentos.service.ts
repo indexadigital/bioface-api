@@ -1,26 +1,35 @@
-import { Injectable } from '@nestjs/common';
 import { CreateDocumentoDto } from './dto/create-documento.dto';
-import { UpdateDocumentoDto } from './dto/update-documento.dto';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Documento } from './entities/documento.entity';
+
 
 @Injectable()
 export class DocumentosService {
-  create(createDocumentoDto: CreateDocumentoDto) {
-    return 'This action adds a new documento';
+  constructor(
+    @InjectRepository(Documento)
+    private documentoRepository: Repository<Documento>,
+  ) {}
+
+  async create(createDocumentoDto: CreateDocumentoDto): Promise<Documento> {
+    return this.documentoRepository.save(createDocumentoDto);
   }
 
-  findAll() {
-    return `This action returns all documentos`;
+  async findAll(): Promise<Documento[]> {
+    return this.documentoRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} documento`;
+  async findOne(id: number): Promise<Documento> {
+    const documento = await this.documentoRepository.findOne({ where: { id: id } });
+    if (!documento) {
+      throw new NotFoundException('Documento não encontrado');
+    }
+    return documento;
   }
 
-  update(id: number, updateDocumentoDto: UpdateDocumentoDto) {
-    return `This action updates a #${id} documento`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} documento`;
+  async remove(id: number): Promise<void> {
+    const documento = await this.findOne(id);
+    await this.documentoRepository.remove(documento);
   }
 }

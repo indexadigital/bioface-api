@@ -3,6 +3,7 @@ CREATE TABLE Usuarios (
     ID SERIAL PRIMARY KEY,
     CPF VARCHAR(11) UNIQUE NOT NULL,
     Senha VARCHAR(50) NOT NULL,
+    Email VARCHAR(255) NOT NULL,
     NomeCompleto VARCHAR(255) NOT NULL,
     Dispositivo VARCHAR(20),
     IP INET,

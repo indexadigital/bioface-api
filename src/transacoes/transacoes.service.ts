@@ -1,26 +1,41 @@
-import { Injectable } from '@nestjs/common';
-import { CreateTransacoeDto } from './dto/create-transacoe.dto';
-import { UpdateTransacoeDto } from './dto/update-transacoe.dto';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Transacao} from './entities/transacao.entity';
+import { CreateTransacaoDto } from './dto/create-transacao.dto';
+import { UpdateTransacaoDto } from './dto/update-transacao.dto';
 
 @Injectable()
 export class TransacoesService {
-  create(createTransacoeDto: CreateTransacoeDto) {
-    return 'This action adds a new transacoe';
+  constructor(
+    @InjectRepository(Transacao)
+    private transacaoRepository: Repository<Transacao>,
+  ) {}
+
+  async create(createTransacaoDto: CreateTransacaoDto): Promise<Transacao> {
+    return this.transacaoRepository.save(createTransacaoDto);
   }
 
-  findAll() {
-    return `This action returns all transacoes`;
+  async findAll(): Promise<Transacao[]> {
+    return this.transacaoRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} transacoe`;
+  async findOne(id: number): Promise<Transacao> {
+    const transacao = await this.transacaoRepository.findOne({ where: { id: id } });
+    if (!transacao) {
+      throw new NotFoundException('Transação não encontrada');
+    }
+    return transacao;
   }
 
-  update(id: number, updateTransacoeDto: UpdateTransacoeDto) {
-    return `This action updates a #${id} transacoe`;
+  async update(id: number, updateTransacaoDto: UpdateTransacaoDto): Promise<Transacao> {
+    const transacao = await this.findOne(id);
+    this.transacaoRepository.merge(transacao, updateTransacaoDto);
+    return this.transacaoRepository.save(transacao);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} transacoe`;
+  async deleteTransacao(id: number): Promise<void> {
+    const transacao = await this.findOne(id);
+    await this.transacaoRepository.remove(transacao);
   }
 }

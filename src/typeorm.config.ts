@@ -10,8 +10,6 @@ const typeOrmConfig: TypeOrmModuleOptions = {
     entities: [__dirname + '/**/*.entity.ts', __dirname + '/**/*.entity.js'],
     migrationsRun: false,
     logging: true,
-    migrationsTableName: "migration",
-    migrations: [__dirname + '/migration/**/*.ts', __dirname + '/migration/**/*.js'],
     synchronize: false
 }
 

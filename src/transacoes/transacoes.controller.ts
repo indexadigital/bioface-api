@@ -1,15 +1,22 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { TransacoesService } from './transacoes.service';
-import { CreateTransacoeDto } from './dto/create-transacoe.dto';
-import { UpdateTransacoeDto } from './dto/update-transacoe.dto';
-
+import { CreateTransacaoDto } from './dto/create-transacao.dto';
+import { UpdateTransacaoDto } from './dto/update-transacao.dto';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+@ApiBearerAuth('token')
+@ApiTags('transacoes')
 @Controller('transacoes')
 export class TransacoesController {
   constructor(private readonly transacoesService: TransacoesService) {}
 
   @Post()
-  create(@Body() createTransacoeDto: CreateTransacoeDto) {
-    return this.transacoesService.create(createTransacoeDto);
+  create(@Body() createTransacaoDto: CreateTransacaoDto) {
+    return this.transacoesService.create(createTransacaoDto);
+  }
+
+  @Post(':id')
+  update(@Param('id') id: string, @Body() updateTransacaoDto: UpdateTransacaoDto) {
+    return this.transacoesService.update(+id, updateTransacaoDto);
   }
 
   @Get()
@@ -21,14 +28,11 @@ export class TransacoesController {
   findOne(@Param('id') id: string) {
     return this.transacoesService.findOne(+id);
   }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTransacoeDto: UpdateTransacoeDto) {
-    return this.transacoesService.update(+id, updateTransacoeDto);
-  }
-
+  
+  /*
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.transacoesService.remove(+id);
   }
+  */
 }

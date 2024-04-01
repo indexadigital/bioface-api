@@ -1,0 +1,11 @@
+server:
+  port: 8000
+
+db:
+  type: 'postgres'
+  port: 5432
+  database: 'bioface'
+
+jwt:
+  expiresIn: 3600
+  tokenName: 'token'

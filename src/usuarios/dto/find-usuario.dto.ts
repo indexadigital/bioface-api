@@ -1,13 +1,9 @@
 import { IsNotEmpty, IsString, IsOptional } from 'class-validator';
 
-export class CreateUsuarioDto {
+export class FindUsuarioDto {
   @IsNotEmpty()
   @IsString()
   cpf: string;
-
-  @IsNotEmpty()
-  @IsString()
-  senha: string;
 
   @IsNotEmpty()
   @IsString()
@@ -16,12 +12,4 @@ export class CreateUsuarioDto {
   @IsOptional()
   @IsString()
   nomeCompleto: string;
-
-  @IsOptional()
-  @IsString()
-  dispositivo?: string;
-
-  @IsOptional()
-  @IsString()
-  ip?: string;
 }

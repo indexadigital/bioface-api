@@ -2,7 +2,9 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { UsuariosService } from './usuarios.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
-
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+@ApiBearerAuth('token')
+@ApiTags('usuarios')
 @Controller('usuarios')
 export class UsuariosController {
   constructor(private readonly usuariosService: UsuariosService) {}
@@ -10,6 +12,11 @@ export class UsuariosController {
   @Post()
   create(@Body() createUsuarioDto: CreateUsuarioDto) {
     return this.usuariosService.create(createUsuarioDto);
+  }
+
+  @Post(':id')
+  update(@Param('id') id: string, @Body() updateUsuarioDto: UpdateUsuarioDto) {
+    return this.usuariosService.update(+id, updateUsuarioDto);
   }
 
   @Get()
@@ -22,13 +29,11 @@ export class UsuariosController {
     return this.usuariosService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUsuarioDto: UpdateUsuarioDto) {
-    return this.usuariosService.update(+id, updateUsuarioDto);
-  }
 
+  /*
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.usuariosService.remove(+id);
   }
+  */
 }
