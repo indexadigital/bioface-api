@@ -11,5 +11,5 @@ export class FindUsuarioDto {
 
   @IsOptional()
   @IsString()
-  nomeCompleto: string;
+  nomecompleto: string;
 }

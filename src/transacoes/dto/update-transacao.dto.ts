@@ -10,7 +10,7 @@ export class UpdateTransacaoDto extends PartialType(CreateTransacaoDto) {
 
     @IsOptional()
     @IsString()
-    responseRaw?: string;
+    responseraw?: string;
 
     @IsOptional()
     @IsString()

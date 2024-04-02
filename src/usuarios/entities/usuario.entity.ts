@@ -3,7 +3,7 @@ import { Documento } from 'src/documentos/entities/documento.entity';
 import { Transacao} from 'src/transacoes/entities/transacao.entity';
 import { Cobranca } from 'src/cobrancas/entities/cobranca.entity';
 
-@Entity()
+@Entity({name: 'usuarios'})
 export class Usuario {
   @PrimaryGeneratedColumn()
   id: number;
@@ -18,7 +18,7 @@ export class Usuario {
   email: string;
 
   @Column({ length: 255 })
-  nomeCompleto: string;
+  nomecompleto: string;
 
   @Column({ length: 20, nullable: true })
   dispositivo?: string;

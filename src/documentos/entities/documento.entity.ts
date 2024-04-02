@@ -1,31 +1,32 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from 'typeorm';
 import { Usuario } from 'src/usuarios/entities/usuario.entity';
 
-@Entity()
+
+@Entity({name: 'documentos'})
 export class Documento {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Usuario, usuario => usuario.documentos)
+  @OneToOne(() => Usuario, usuario => usuario.documentos)
   usuario: Usuario;
 
   @Column({ nullable: true })
-  nomeCompleto?: string;
+  nomecompleto?: string;
 
   @Column({ nullable: true })
   rg?: number;
 
   @Column({ nullable: true })
-  orgaoExpedidor?: string;
+  orgaoexpedidor?: string;
 
   @Column({ nullable: true })
-  estadoEmissao?: string;
+  estadoemissao?: string;
 
   @Column({ unique: true, length: 11 })
   cpf: string;
 
   @Column({ nullable: true })
-  dataNascimento?: Date;
+  datanascimento?: Date;
 
   @Column({ nullable: true })
   mae?: string;
@@ -34,25 +35,25 @@ export class Documento {
   pai?: string;
 
   @Column({ nullable: true })
-  numSeguranca?: number;
+  numseguranca?: number;
 
   @Column({ nullable: true })
   categoria?: string;
 
   @Column({ nullable: true })
-  numRegistro?: number;
+  numregistro?: number;
 
   @Column({ nullable: true })
   validade?: Date;
 
   @Column({ nullable: true })
-  primeiraHabilitacao?: Date;
+  primeirahabilitacao?: Date;
 
   @Column({ nullable: true })
-  dataEmissao?: Date;
+  dataemissao?: Date;
 
   @Column({ nullable: true })
-  cidadeEmissao?: string;
+  cidadeemissao?: string;
 
   @Column({ nullable: true })
   observacao?: string;

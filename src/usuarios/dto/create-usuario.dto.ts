@@ -15,7 +15,7 @@ export class CreateUsuarioDto {
 
   @IsOptional()
   @IsString()
-  nomeCompleto: string;
+  nomecompleto: string;
 
   @IsOptional()
   @IsString()

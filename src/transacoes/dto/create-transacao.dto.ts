@@ -7,11 +7,11 @@ export class CreateTransacaoDto {
 
     @IsOptional()
     @IsString()
-    refId?: string;
+    refid?: string;
 
     @IsOptional()
     @IsString()
-    tipoTransacao?: string;
+    tipotransacao?: string;
 
     @IsOptional()
     @IsString()
@@ -19,16 +19,16 @@ export class CreateTransacaoDto {
 
     @IsOptional()
     @IsString()
-    responseRaw?: string;
+    responseraw?: string;
 
     @IsOptional()
     @IsString()
-    codeAuth?: string;
+    codeauth?: string;
 
     @IsOptional()
     @IsString()
     @IsDateString()
-    expireAuth?: string;
+    expireauth?: string;
 
     @IsOptional()
     @IsString()

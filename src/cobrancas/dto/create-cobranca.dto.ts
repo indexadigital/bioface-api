@@ -7,7 +7,7 @@ export class CreateCobrancaDto {
 
   @IsOptional()
   @IsString()
-  refId?: string;
+  refid?: string;
 
   @IsOptional()
   @IsString()
@@ -19,15 +19,15 @@ export class CreateCobrancaDto {
 
   @IsNotEmpty()
   @IsNumber()
-  totalTransacoes: number;
+  totaltransacoes: number;
 
   @IsOptional()
   @IsDateString()
-  dataVencimento?: string;
+  datavencimento?: string;
 
   @IsOptional()
   @IsDateString()
-  dataExpiracao?: string;
+  dataexpiracao?: string;
 
   @IsOptional()
   @IsString()

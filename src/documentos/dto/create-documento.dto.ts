@@ -7,7 +7,7 @@ export class CreateDocumentoDto {
 
   @IsOptional()
   @IsString()
-  nomeCompleto?: string;
+  nomecompleto?: string;
 
   @IsOptional()
   @IsNumber()
@@ -15,11 +15,11 @@ export class CreateDocumentoDto {
 
   @IsOptional()
   @IsString()
-  orgaoExpedidor?: string;
+  orgaoexpedidor?: string;
 
   @IsOptional()
   @IsString()
-  estadoEmissao?: string;
+  estadoemissao?: string;
 
   @IsNotEmpty()
   @IsString()
@@ -27,7 +27,7 @@ export class CreateDocumentoDto {
 
   @IsOptional()
   @IsDateString()
-  dataNascimento?: string;
+  datanascimento?: string;
 
   @IsOptional()
   @IsString()
@@ -39,7 +39,7 @@ export class CreateDocumentoDto {
 
   @IsOptional()
   @IsNumber()
-  numSeguranca?: number;
+  numseguranca?: number;
 
   @IsOptional()
   @IsString()
@@ -55,15 +55,15 @@ export class CreateDocumentoDto {
 
   @IsOptional()
   @IsDateString()
-  primeiraHabilitacao?: string;
+  primeirahabilitacao?: string;
 
   @IsOptional()
   @IsDateString()
-  dataEmissao?: string;
+  dataemissao?: string;
 
   @IsOptional()
   @IsString()
-  cidadeEmissao?: string;
+  cidadeemissao?: string;
 
   @IsOptional()
   @IsString()

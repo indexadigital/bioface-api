@@ -1,7 +1,8 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { Usuario } from 'src/usuarios/entities/usuario.entity';
 
-@Entity()
+
+@Entity({name: 'transacoes'})
 export class Transacao{
   @PrimaryGeneratedColumn()
   id: number;
@@ -10,22 +11,22 @@ export class Transacao{
   usuario: Usuario;
 
   @Column({ nullable: true })
-  refId?: string;
+  refid?: string;
 
   @Column({ nullable: true })
-  tipoTransacao?: string;
+  tipotransacao?: string;
 
   @Column({ nullable: true })
   token?: string;
 
   @Column({ nullable: true })
-  responseRaw?: string;
+  responseraw?: string;
 
   @Column({ nullable: true })
-  codeAuth?: string;
+  codeauth?: string;
 
   @Column({ nullable: true })
-  expireAuth?: Date;
+  expireauth?: Date;
 
   @Column({ nullable: true })
   status?: string;
