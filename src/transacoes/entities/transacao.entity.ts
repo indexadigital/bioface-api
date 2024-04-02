@@ -7,7 +7,7 @@ export class Transacao{
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Usuario, usuario => usuario.transacoes)
+  @ManyToOne(() => Usuario, usuario => usuario.transacao)
   usuario: Usuario;
 
   @Column({ nullable: true })

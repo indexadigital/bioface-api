@@ -30,7 +30,7 @@ export class Usuario {
   documentos: Documento[];
 
   @OneToMany(() => Transacao, transacao => transacao.usuario)
-  transacoes: Transacao[];
+  transacao: Transacao[];
 
   @OneToMany(() => Cobranca, cobranca => cobranca.usuario)
   cobrancas: Cobranca[];
