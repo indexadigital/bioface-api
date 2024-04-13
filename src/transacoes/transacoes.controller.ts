@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Req } from '@nestjs/common';
 import { TransacoesService } from './transacoes.service';
 import { CreateTransacaoDto } from './dto/create-transacao.dto';
 import { UpdateTransacaoDto } from './dto/update-transacao.dto';
@@ -10,7 +10,7 @@ export class TransacoesController {
   constructor(private readonly transacoesService: TransacoesService) {}
 
   @Post()
-  create(@Body() createTransacaoDto: CreateTransacaoDto) {
+  create(@Req() request: Request, @Body() createTransacaoDto: CreateTransacaoDto) {
     return this.transacoesService.create(createTransacaoDto);
   }
 

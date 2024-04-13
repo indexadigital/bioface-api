@@ -23,15 +23,6 @@ export class CreateTransacaoDto {
 
     @IsOptional()
     @IsString()
-    codeauth?: string;
-
-    @IsOptional()
-    @IsString()
-    @IsDateString()
-    expireauth?: string;
-
-    @IsOptional()
-    @IsString()
     status?: string;
 
     @IsOptional()
