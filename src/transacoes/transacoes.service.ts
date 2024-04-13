@@ -13,7 +13,8 @@ export class TransacoesService {
   ) {}
 
   async create(createTransacaoDto: CreateTransacaoDto): Promise<Transacao> {
-    return this.transacaoRepository.save(createTransacaoDto);
+    const transacao = this.transacaoRepository.create(createTransacaoDto)
+    return this.transacaoRepository.save(transacao);
   }
 
   async findAll(): Promise<Transacao[]> {

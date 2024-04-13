@@ -3,6 +3,8 @@ import { UsuariosService } from './usuarios.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { LoginDto } from './dto/login.dto';
+import { Usuario } from './entities/usuario.entity';
 @ApiBearerAuth('token')
 @ApiTags('usuarios')
 @Controller('usuarios')
@@ -13,7 +15,11 @@ export class UsuariosController {
   create(@Body() createUsuarioDto: CreateUsuarioDto) {
     return this.usuariosService.create(createUsuarioDto);
   }
-
+  @Post('login')
+  async login(@Body() loginDto: LoginDto) {
+    const { cpf, senha } = loginDto;    
+    return this.usuariosService.login(cpf, senha);
+  }
   @Post(':id')
   update(@Param('id') id: string, @Body() updateUsuarioDto: UpdateUsuarioDto) {
     return this.usuariosService.update(+id, updateUsuarioDto);
@@ -29,6 +35,7 @@ export class UsuariosController {
     return this.usuariosService.findOne(+id);
   }
 
+  
 
   /*
   @Delete(':id')

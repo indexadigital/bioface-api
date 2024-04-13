@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, OneToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, OneToMany, OneToOne } from 'typeorm';
+import * as bcrypt from 'bcrypt';
 import { Documento } from 'src/documentos/entities/documento.entity';
 import { Transacao} from 'src/transacoes/entities/transacao.entity';
 import { Cobranca } from 'src/cobrancas/entities/cobranca.entity';
@@ -11,8 +12,15 @@ export class Usuario {
   @Column({ unique: true, length: 11 })
   cpf: string;
 
-  @Column({ length: 50 })
+  @Column({ length: 60 })
   senha: string;
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  async hashPassword(): Promise<void> {
+    const salt = await bcrypt.genSalt();
+    this.senha = await bcrypt.hash(this.senha, salt);
+  }
 
   @Column({ length: 255 })
   email: string;
@@ -40,4 +48,6 @@ export class Usuario {
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   updated: Date;
+
+ 
 }

@@ -13,7 +13,8 @@ export class CobrancasService {
   ) {}
 
   async create(createCobrancaDto: CreateCobrancaDto): Promise<Cobranca> {
-    return this.cobrancaRepository.save(createCobrancaDto);
+    const cobranca = this.cobrancaRepository.create(createCobrancaDto)
+    return this.cobrancaRepository.save(cobranca);
   }
 
   async findAll(): Promise<Cobranca[]> {
