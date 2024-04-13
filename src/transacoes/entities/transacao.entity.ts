@@ -51,13 +51,6 @@ export class Transacao{
   @Column({ nullable: true })
   ip?: string;
 
-  @BeforeInsert()
-  @BeforeUpdate()
-  async setIpAddress(request: Request): Promise<void> {
-    const ipAddress = request.headers['x-forwarded-for'] || request.headers['x-real-ip'];
-    this.ip = ipAddress;
-  }
-
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created: Date;
 
