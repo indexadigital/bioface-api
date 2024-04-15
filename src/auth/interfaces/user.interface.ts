@@ -1,16 +1,11 @@
+import { UserDto } from "../dto/user.dto";
+
 export enum Role {
   Admin = 'admin',
   Customer = 'customer',
 }
-
-type User = {
-  id: string;
-  username: string;
-  password: string;
-  role: Role;
-};
-
 export interface IAuthenticate {
-  readonly user: User;
+  readonly user: UserDto;
   readonly token: string;
+  readonly message: string;
 }

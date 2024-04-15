@@ -1,6 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, BeforeInsert, BeforeUpdate } from 'typeorm';
 import { Usuario } from 'src/usuarios/entities/usuario.entity';
-
 
 @Entity({name: 'documentos'})
 export class Documento {
@@ -9,6 +8,17 @@ export class Documento {
 
   @OneToOne(() => Usuario, usuario => usuario.documentos)
   usuario: Usuario;
+
+  @Column({ nullable: true })
+  usuarioId: number;
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  async setusuarioId(): Promise<void> {
+    if (this.usuario) {
+      this.usuarioId = this.usuario.id;
+    }
+  }
 
   @Column({ nullable: true })
   nomecompleto?: string;

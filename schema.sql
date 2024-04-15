@@ -1,70 +1,79 @@
+-- Tabela Autenticação
+CREATE TABLE Auth (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(25) UNIQUE NOT NULL,
+    password VARCHAR(60) NOT NULL,
+    role VARCHAR(10) UNIQUE NOT NULL,
+    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 -- Tabela Usuários
 CREATE TABLE Usuarios (
-    ID SERIAL PRIMARY KEY,
-    CPF VARCHAR(11) UNIQUE NOT NULL,
-    Senha VARCHAR(60) NOT NULL,
-    Email VARCHAR(255) NOT NULL,
-    NomeCompleto VARCHAR(255) NOT NULL,
-    Dispositivo VARCHAR(20),
-    IP INET,
-    Created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    Updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    id SERIAL PRIMARY KEY,
+    cpf VARCHAR(11) UNIQUE NOT NULL,
+    senha VARCHAR(60) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    dispositivo VARCHAR(20),
+    ip INET,
+    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Tabela Documentos
 CREATE TABLE Documentos (
-    ID SERIAL PRIMARY KEY,
-    UsuarioID INT NOT NULL,
-    NomeCompleto VARCHAR(255),
-    RG INT,
-    OrgaoExpedidor VARCHAR(50),
-    EstadoEmissao VARCHAR(2),
-    CPF VARCHAR(11) UNIQUE NOT NULL,
-    DataNascimento DATE,
-    Mae VARCHAR(255),
-    Pai VARCHAR(255),
-    NumSeguranca INT,
-    Categoria VARCHAR(10),
-    NumRegistro INT,
-    Validade DATE,
-    PrimeiraHabilitacao DATE,
-    DataEmissao DATE,
-    CidadeEmissao VARCHAR(100),
-    Observacao TEXT,
-    Created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    Updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (UsuarioID) REFERENCES Usuarios(ID)
+    id SERIAL PRIMARY KEY,
+    usuarioId INT NOT NULL,
+    nomecompleto VARCHAR(255),
+    rg INT,
+    orgaoexpedidor VARCHAR(50),
+    estadoemissao VARCHAR(2),
+    cpf VARCHAR(11) UNIQUE NOT NULL,
+    datanascimento DATE,
+    mae VARCHAR(255),
+    pai VARCHAR(255),
+    numseguranca INT,
+    categoria VARCHAR(10),
+    numregistro INT,
+    validade DATE,
+    primeirahabilitacao DATE,
+    dataemissao DATE,
+    cidadeemissao VARCHAR(100),
+    observacao TEXT,
+    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuarioId) REFERENCES Usuarios(id)
 );
 
 -- Tabela de Transações
 CREATE TABLE Transacoes (
-    ID SERIAL PRIMARY KEY,
-    UsuarioID INT NOT NULL,
-    RefID VARCHAR(50),
-    TipoTransacao VARCHAR(50),
-    Token VARCHAR(255),
-    ResponseRaw TEXT,
-    CodeAuth VARCHAR(6) UNIQUE,
-    ExpireAuth TIMESTAMP DEFAULT CURRENT_TIMESTAMP + INTERVAL '5 Minutes',
+    id SERIAL PRIMARY KEY,
+    usuarioId INT NOT NULL,
+    refid VARCHAR(50),
+    tipotransacao VARCHAR(50),
+    token VARCHAR(255),
+    responseraw TEXT,
+    codeauth VARCHAR(6) UNIQUE,
+    expireauth TIMESTAMP DEFAULT CURRENT_TIMESTAMP + INTERVAL '5 Minutes',
     Status VARCHAR(50),
-    IP INET,
-    Created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    Updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (UsuarioID) REFERENCES Usuarios(ID)
+    ip INET,
+    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuarioId) REFERENCES Usuarios(id)
 );
 
 -- Tabela de Cobranças
 CREATE TABLE Cobrancas (
-    ID SERIAL PRIMARY KEY,
-    UsuarioID INT NOT NULL,
-    RefID VARCHAR(50),
-    Token VARCHAR(255),
-    Valor DECIMAL(10, 2),
-    TotalTransacoes INT NOT NULL,
-    DataVencimento DATE,
-    DataExpiracao DATE,
-    Status VARCHAR(50),
-    Created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    Updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (UsuarioID) REFERENCES Usuarios(ID)
+    id SERIAL PRIMARY KEY,
+    usuarioId INT NOT NULL,
+    refid VARCHAR(50),
+    token VARCHAR(255),
+    valor DECIMAL(10, 2),
+    totaltransacoes INT NOT NULL,
+    datavencimento DATE,
+    dataexpiracao DATE,
+    status VARCHAR(50),
+    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuarioId) REFERENCES Usuarios(id)
 );

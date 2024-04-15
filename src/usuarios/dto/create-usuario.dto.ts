@@ -15,10 +15,6 @@ export class CreateUsuarioDto {
 
   @IsOptional()
   @IsString()
-  nomecompleto: string;
-
-  @IsOptional()
-  @IsString()
   dispositivo?: string;
 
   @IsOptional()

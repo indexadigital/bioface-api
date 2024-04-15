@@ -14,7 +14,7 @@ export class Transacao{
 
   @BeforeInsert()
   @BeforeUpdate()
-  async setUsuarioId(): Promise<void> {
+  async setusuarioId(): Promise<void> {
     if (this.usuario) {
       this.usuarioId = this.usuario.id;
     }

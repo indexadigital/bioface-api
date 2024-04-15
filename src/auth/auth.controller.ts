@@ -21,16 +21,16 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post()
-  login(@Res() res, @Body() authenticateDto: AuthenticateDto) {
+  async login(@Res() res, @Body() authenticateDto: AuthenticateDto) {
     try {
-      const response = this.authService.authenticate(authenticateDto);
+      const response = await this.authService.authenticate(authenticateDto);
       return res.status(HttpStatus.OK).json({ response });
     } catch (error) {
       return res.status(error.status).json(error.response);
     }
   }
 
-  @Roles('customer')
+  @Roles('customer','admin')
   @UseGuards(JwtAuthGuard, RoleGuard)
   @Get()
   profile(@Req() req, @Res() res) {

@@ -3,7 +3,6 @@ import * as bcrypt from 'bcrypt';
 import { Documento } from 'src/documentos/entities/documento.entity';
 import { Transacao} from 'src/transacoes/entities/transacao.entity';
 import { Cobranca } from 'src/cobrancas/entities/cobranca.entity';
-
 @Entity({name: 'usuarios'})
 export class Usuario {
   @PrimaryGeneratedColumn()
@@ -24,9 +23,6 @@ export class Usuario {
 
   @Column({ length: 255 })
   email: string;
-
-  @Column({ length: 255 })
-  nomecompleto: string;
 
   @Column({ length: 20, nullable: true })
   dispositivo?: string;

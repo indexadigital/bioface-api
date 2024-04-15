@@ -18,15 +18,15 @@ import { JwtStrategy } from './auth/jwt.strategy';
 @Module({
   imports: [
     TypeOrmModule.forRoot(typeOrmConfig),
-    UsuariosModule,
-    DocumentosModule,
-    TransacoesModule,
-    CobrancasModule,
     AuthModule,
     PassportModule,
     JwtModule.register({ secret: 'secrete', signOptions: { expiresIn: '1h' } }),
+    UsuariosModule,
+    DocumentosModule,
+    TransacoesModule,
+    CobrancasModule    
   ],
-  controllers: [AppController, AuthController],
-  providers: [AppService, AuthService, JwtStrategy],
+  controllers: [AppController],
+  providers: [AppService, JwtStrategy],
 })
 export class AppModule {}

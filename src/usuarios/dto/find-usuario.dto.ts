@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, IsOptional } from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 export class FindUsuarioDto {
   @IsNotEmpty()
@@ -8,8 +8,4 @@ export class FindUsuarioDto {
   @IsNotEmpty()
   @IsString()
   email: string;
-
-  @IsOptional()
-  @IsString()
-  nomecompleto: string;
 }

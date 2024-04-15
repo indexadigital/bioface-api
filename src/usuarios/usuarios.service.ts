@@ -50,21 +50,21 @@ export class UsuariosService {
     await this.usuarioRepository.remove(usuario);
   }
 
-  async login(cpf: string, senha: string): Promise<{ usuario: Usuario | null, mensagem: string }> {
+  async login(cpf: string, senha: string): Promise<{ usuario: Usuario | null, message: string }> {
     try {
       const usuario = await this.usuarioRepository.findOne({ where: { cpf: cpf } });
   
       if (!usuario) { // Usuário não encontrado
-        return { usuario: null, mensagem: 'Usuário ou senha incorreta.' };
+        return { usuario: null, message: 'Usuário ou senha incorreta.' };
       }
   
       const senhaCorreta = await bcrypt.compare(senha, usuario.senha);
   
       if (!senhaCorreta) { // Senha incorreta
-        return { usuario: null, mensagem: 'Senha ou usuário incorreto.' };
+        return { usuario: null, message: 'Senha ou usuário incorreto.' };
       }
   
-      return { usuario, mensagem: 'Login bem-sucedido' };
+      return { usuario, message: 'Login bem-sucedido' };
     } catch (error) {
       console.error('Erro durante o login:', error);
       throw error; // Lançar erro para tratamento adequado
