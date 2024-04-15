@@ -41,10 +41,10 @@ export class Transacao{
     const authCode = Math.floor(100000 + Math.random() * 900000);
     this.codeauth = authCode.toString(); 
   }
-
+  /*
   @Column({ nullable: true, type: 'timestamp', default: () => "CURRENT_TIMESTAMP + INTERVAL '5 Minutes'" })
   expireauth?: Date;
-
+  */
   @Column({ nullable: true })
   status?: string;
 

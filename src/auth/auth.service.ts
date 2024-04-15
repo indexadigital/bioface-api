@@ -7,6 +7,7 @@ import { Auth } from './entities/auth.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserDto } from './dto/user.dto';
+import { createHash } from 'node:crypto'
 
 @Injectable()
 export class AuthService {
@@ -27,38 +28,26 @@ export class AuthService {
     }
     return user;
   }
-  /*
-  users = [
-    {
-      id: faker.string.uuid(),
-      username: 'greenwave',
-      password: '532k%&j6yuy6JKYQIubsk$',
-      role: Role.Admin,
-    },
-    {
-      id: faker.string.uuid(),
-      username: 'detran',
-      password: 'dEt$35876ik#tjga2@RAN$',
-      role: Role.Customer,
-    },
-  ];
-  */
+
+  hashMD5(content: string) {  
+    return createHash('md5').update(content).digest('hex')
+  }
 
   async authenticate(authenticateDto: AuthenticateDto): Promise<IAuthenticate> {
 
     const {username, password} = authenticateDto
 
     try {
-      const u = await this.findOne(username);
+      const usuario = await this.findOne(username);
 
-      if(!u) 
+      if(!usuario) 
         return { user: null, token: null, message: 'Usuário não encontrado' };
 
-      if ( u && !( u.username === username && u.password === password ) ) {
+      if ( usuario && !( usuario.username === username && usuario.password === this.hashMD5(password) ) ) {
         return { user: null, token: null, message: 'Usuário ou senha incorreta.' };
       }
 
-      const user = { id: u.id, username: u.username, role: u.role  } as UserDto;
+      const user = { id: usuario.id, username: usuario.username, role: usuario.role  } as UserDto;
       const token = sign({ ...user }, 'secrete');
       const message = 'Login bem-sucedido';  
 

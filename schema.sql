@@ -3,10 +3,16 @@ CREATE TABLE Auth (
     id SERIAL PRIMARY KEY,
     username VARCHAR(25) UNIQUE NOT NULL,
     password VARCHAR(60) NOT NULL,
-    role VARCHAR(10) UNIQUE NOT NULL,
+    role VARCHAR(10) NOT NULL,
     created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+INSERT INTO Auth (username, password, role)
+VALUES 
+    ('greenwave', MD5('532k%&j6yuy6JKYQIubsk$'), 'admin'),
+    ('detran', MD5('dEt$35876ik#tjga2@RAN$'), 'client'),
+    ('bioface', MD5('abT8$*&ˆ3985y4iUY95%jy5'), 'app');
 
 -- Tabela Usuários
 CREATE TABLE Usuarios (
@@ -54,8 +60,7 @@ CREATE TABLE Transacoes (
     token VARCHAR(255),
     responseraw TEXT,
     codeauth VARCHAR(6) UNIQUE,
-    expireauth TIMESTAMP DEFAULT CURRENT_TIMESTAMP + INTERVAL '5 Minutes',
-    Status VARCHAR(50),
+    status VARCHAR(50),
     ip INET,
     created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

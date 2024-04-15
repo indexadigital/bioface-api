@@ -11,7 +11,7 @@ import { Roles } from 'src/auth/roles.decorator';
 export class DocumentosController {
   constructor(private readonly documentosService: DocumentosService) {}
 
-  @Roles('admin')
+  @Roles('app', 'admin')
   @UseGuards(JwtAuthGuard, RoleGuard)
   @Post()
   create(@Body() createDocumentoDto: CreateDocumentoDto) {
@@ -25,7 +25,7 @@ export class DocumentosController {
     return this.documentosService.findAll();
   }
 
-  @Roles('admin')
+  @Roles('app', 'admin')
   @UseGuards(JwtAuthGuard, RoleGuard)
   @Get(':id')
   findOne(@Param('id') id: string) {

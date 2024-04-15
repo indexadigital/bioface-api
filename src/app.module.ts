@@ -14,6 +14,7 @@ import { AuthModule } from './auth/auth.module';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './auth/jwt.strategy';
+import { TokenModule } from './token/token.module';
 
 @Module({
   imports: [
@@ -24,7 +25,8 @@ import { JwtStrategy } from './auth/jwt.strategy';
     UsuariosModule,
     DocumentosModule,
     TransacoesModule,
-    CobrancasModule    
+    CobrancasModule,
+    TokenModule    
   ],
   controllers: [AppController],
   providers: [AppService, JwtStrategy],

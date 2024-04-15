@@ -12,14 +12,14 @@ import { Roles } from 'src/auth/roles.decorator';
 export class TransacoesController {
   constructor(private readonly transacoesService: TransacoesService) {}
 
-  @Roles('admin')
+  @Roles('app', 'admin')
   @UseGuards(JwtAuthGuard, RoleGuard)
   @Post()
   create(@Body() createTransacaoDto: CreateTransacaoDto) {
     return this.transacoesService.create(createTransacaoDto);
   }
 
-  @Roles('admin')
+  @Roles('app', 'admin')
   @UseGuards(JwtAuthGuard, RoleGuard)
   @Post(':id')
   update(@Param('id') id: string, @Body() updateTransacaoDto: UpdateTransacaoDto) {
@@ -33,7 +33,7 @@ export class TransacoesController {
     return this.transacoesService.findAll();
   }
 
-  @Roles('admin')
+  @Roles('app', 'admin')
   @UseGuards(JwtAuthGuard, RoleGuard)
   @Get(':id')
   findOne(@Param('id') id: string) {

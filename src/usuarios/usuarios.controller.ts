@@ -13,14 +13,14 @@ import { Roles } from 'src/auth/roles.decorator';
 export class UsuariosController {
   constructor(private readonly usuariosService: UsuariosService) {}
 
-  @Roles('admin')
+  @Roles('app', 'admin')
   @UseGuards(JwtAuthGuard, RoleGuard)
   @Post()
   create(@Body() createUsuarioDto: CreateUsuarioDto) {
     return this.usuariosService.create(createUsuarioDto);
   }
 
-  @Roles('customer','admin')
+  @Roles('app', 'admin')
   @UseGuards(JwtAuthGuard, RoleGuard)
   @Post('login')
   async login(@Body() loginDto: LoginDto) {
@@ -28,21 +28,21 @@ export class UsuariosController {
     return this.usuariosService.login(cpf, senha);
   }
   
-  @Roles('admin')
+  @Roles('app', 'admin')
   @UseGuards(JwtAuthGuard, RoleGuard)
   @Post(':id')
   update(@Param('id') id: string, @Body() updateUsuarioDto: UpdateUsuarioDto) {
     return this.usuariosService.update(+id, updateUsuarioDto);
   }
 
-  @Roles('admin')
+  @Roles('app', 'admin')
   @UseGuards(JwtAuthGuard, RoleGuard)
   @Get()
   findAll() {
     return this.usuariosService.findAll();
   }
 
-  @Roles('admin')
+  @Roles('app', 'admin')
   @UseGuards(JwtAuthGuard, RoleGuard)
   @Get(':id')
   findOne(@Param('id') id: string) {
