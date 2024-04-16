@@ -34,7 +34,8 @@ export class UsuariosService {
   async findOne(id: number): Promise<Usuario> {
     const usuario = await this.usuarioRepository.findOne({ where: { id: id } });
     if (!usuario) {
-      throw new NotFoundException('Usuário não encontrado');
+      //throw new NotFoundException('Usuário não encontrado');
+      return null;
     }
     return usuario;
   }

@@ -1,15 +1,5 @@
 version: '3.8'
 services: 
-  db:
-    image: postgres
-    restart: always
-    environment: 
-      - POSTGRES_USER=${DATABASE_USER}
-      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
-      - POSTGRES_DB=${DB_NAME}
-    container_name: database-container
-    volumes:
-      - ./pgdata:/var/lib/postgresql/data
   app:
     build: 
       context: .
@@ -17,13 +7,13 @@ services:
     container_name: app-container
     environment: 
       - DB_TYPE=${DB_TYPE}
-      - POSTGRES_HOST=${POSTGRES_HOST}
-      - POSTGRES_USER=${DATABASE_USER}
-      - POSTGRES_PASS=${DATABASE_PASSWORD}
+      - POSTGRES_HOST=${DB_HOST}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASS=${DB_PASSWORD}
       - POSTGRES_DB=${DB_NAME}
       - POSTGRES_SYNC=false
       - JWT_SECRET=${JWT_SECRET}
-      - POSTGRES_PORT=${POSTGRES_PORT}
+      - POSTGRES_PORT=${DB_PORT}
       - APP_EXPIRES=${APP_EXPIRES}
       - APP_PORT=${APP_PORT}
     ports: 
@@ -33,20 +23,3 @@ services:
     volumes: 
       - .:/app
       - /app/node_modules
-  pgadmin:
-    image: dpage/pgadmin4
-    restart: always
-    container_name: pgadmin4-container
-    environment: 
-      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
-      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
-      - PGADMIN_LISTEN_PORT=${PGADMIN_LISTEN_PORT}
-    ports: 
-      - "8080:80"
-    volumes: 
-      - ./pgadmin-data:/var/lib/pgadmin
-    depends_on: 
-      - db
-volumes:
-  pgdata:
-  pgadmin-data:

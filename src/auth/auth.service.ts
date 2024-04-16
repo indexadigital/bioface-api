@@ -24,7 +24,7 @@ export class AuthService {
   async findOne(username: string): Promise<Auth> {
     const user = await this.authRepository.findOne({ where: { username: username } });
     if (!user) {
-      throw new NotFoundException('Usuário não encontrado');
+      return null;
     }
     return user;
   }
@@ -40,8 +40,11 @@ export class AuthService {
     try {
       const usuario = await this.findOne(username);
 
-      if(!usuario) 
-        return { user: null, token: null, message: 'Usuário não encontrado' };
+      console.log(usuario);
+
+      if(!usuario) {
+        return { user: null, token: null, message: 'Usuário não encontrado.' };
+      }
 
       if ( usuario && !( usuario.username === username && usuario.password === this.hashMD5(password) ) ) {
         return { user: null, token: null, message: 'Usuário ou senha incorreta.' };
@@ -49,7 +52,7 @@ export class AuthService {
 
       const user = { id: usuario.id, username: usuario.username, role: usuario.role  } as UserDto;
       const token = sign({ ...user }, 'secrete');
-      const message = 'Login bem-sucedido';  
+      const message = 'Login bem-sucedido.';  
 
       return { token, user, message};
 
