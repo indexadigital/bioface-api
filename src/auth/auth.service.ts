@@ -40,8 +40,6 @@ export class AuthService {
     try {
       const usuario = await this.findOne(username);
 
-      console.log(usuario);
-
       if(!usuario) {
         return { user: null, token: null, message: 'Usuário não encontrado.' };
       }
